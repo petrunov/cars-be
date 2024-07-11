@@ -6,6 +6,10 @@
 
 `docker-compose down -v && docker-compose rm -f && docker image prune -f && docker network prune -f && docker-compose up --build`
 
+# Access API documentation
+
+http://localhost:3001/api
+
 # DB Migrations Cheatsheet
 
 ## Direct connection to db
