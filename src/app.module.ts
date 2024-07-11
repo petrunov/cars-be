@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AppConfig, DbConfig } from '../config';
+import { CarsModule } from './cars/cars.module';
 
 @Module({
   imports: [
@@ -11,6 +13,22 @@ import { AppConfig, DbConfig } from '../config';
       cache: true,
       load: [AppConfig, DbConfig],
     }),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        type: 'mysql',
+        host: configService.get<string>('MYSQL_HOST', 'localhost'),
+        port: configService.get<number>('MYSQL_PORT', 3306),
+        username: configService.get<string>('MYSQL_USER', 'root'),
+        password: configService.get<string>('MYSQL_PASSWORD', ''),
+        database: configService.get<string>('MYSQL_DATABASE', 'cars'),
+        entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+        synchronize: process.env.NODE_ENV === 'development',
+        logging: process.env.NODE_ENV === 'development',
+      }),
+    }),
+    CarsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
