@@ -6,6 +6,8 @@ import {
   Patch,
   Param,
   Delete,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 
 import { Car } from './entities/car.entity';
@@ -18,13 +20,13 @@ export class CarsController {
   constructor(private readonly carsService: CarsService) {}
 
   @Post()
+  @UsePipes(new ValidationPipe({ whitelist: true }))
   create(@Body() createCarDto: CreateCarDto): Promise<Car> {
     return this.carsService.create(createCarDto);
   }
 
   @Get()
   findAll(): Promise<Car[]> {
-    console.log('in controller');
     return this.carsService.findAll();
   }
 
@@ -34,6 +36,7 @@ export class CarsController {
   }
 
   @Patch(':id')
+  @UsePipes(new ValidationPipe({ whitelist: true }))
   update(
     @Param('id') id: string,
     @Body() updateCarDto: UpdateCarDto,
