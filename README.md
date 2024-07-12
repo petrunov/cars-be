@@ -1,14 +1,16 @@
 # Initial start
 
-## In case `MYSQL_HOST=host.docker.internal`:
+## With Docker:
 
+`MYSQL_HOST=host.docker.internal`
 `docker compose up`
 
-## In case `MYSQL_HOST=localhost`:
+## On local machine:
 
+Note: With this option you need to have your localhost mysql server instance running at port 3306, prepared with database `cars` and user `carsdealer` and password `relaed` that has privileges on that database.
+
+`MYSQL_HOST=localhost`
 `npm run migration:run && npm run start:dev`
-
-(With this option you need to have your localhost mysql server instance running at port 3306, prepared with database `cars` and user `carsdealer` and password `relaed` that has privileges on that database)
 
 # Fresh restart
 
