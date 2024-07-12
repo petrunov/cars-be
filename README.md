@@ -10,7 +10,11 @@ In case `MYSQL_HOST=localhost`: `npm run start:dev` (With this option you need t
 
 # Access API documentation
 
-http://localhost:3001/api
+Docker is running on port 3001 and localhost on 3000 by default:
+
+localhost: http://localhost:3000/api
+or
+docker: http://localhost:3001/api
 
 # DB Migrations Cheatsheet
 
