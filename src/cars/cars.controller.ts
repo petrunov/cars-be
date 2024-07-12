@@ -9,6 +9,7 @@ import {
   UsePipes,
   ValidationPipe,
   UseGuards,
+  Request,
 } from '@nestjs/common';
 
 import { Car } from './entities/car.entity';
@@ -24,7 +25,7 @@ export class CarsController {
   @Post()
   @UseGuards(AuthGuard)
   @UsePipes(new ValidationPipe({ whitelist: true }))
-  create(@Body() createCarDto: CreateCarDto): Promise<Car> {
+  create(@Request() req, @Body() createCarDto: CreateCarDto): Promise<Car> {
     return this.carsService.create(createCarDto);
   }
 
@@ -42,6 +43,7 @@ export class CarsController {
   @UseGuards(AuthGuard)
   @UsePipes(new ValidationPipe({ whitelist: true }))
   update(
+    @Request() req,
     @Param('id') id: string,
     @Body() updateCarDto: UpdateCarDto,
   ): Promise<Car> {
@@ -50,7 +52,7 @@ export class CarsController {
 
   @Delete(':id')
   @UseGuards(AuthGuard)
-  remove(@Param('id') id: string): Promise<void> {
+  remove(@Request() req, @Param('id') id: string): Promise<void> {
     return this.carsService.remove(+id);
   }
 }

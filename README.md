@@ -24,6 +24,14 @@ localhost: http://localhost:3000/api
 or
 docker: http://localhost:3001/api
 
+# Access API endpoints
+
+GET: `localhost:3000/api/cars`
+
+POST:
+Get an auth token with the credentials seeded by the `InitialSetup` db migration.
+`curl -X POST http://localhost:3000/auth/login -d '{"username": "petrunov", "password": "123"}' -H "Content-Type: application/json"`
+
 # DB Migrations Cheatsheet
 
 ## Direct connection to db
