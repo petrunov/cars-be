@@ -1,91 +1,62 @@
+// cars/cars.service.ts
+
 import {
   Injectable,
   NotFoundException,
-  // UnauthorizedException,
+  ForbiddenException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, EntityNotFoundError } from 'typeorm';
+import { Repository } from 'typeorm';
+import { Car } from './entities/car.entity';
 import { CreateCarDto } from './dto/create-car.dto';
 import { UpdateCarDto } from './dto/update-car.dto';
-import { Car } from './entities/car.entity';
+import { User } from '../users/entities/user.entity';
 
 @Injectable()
 export class CarsService {
   constructor(
     @InjectRepository(Car)
-    private readonly carRepository: Repository<Car>,
+    private carsRepository: Repository<Car>,
   ) {}
 
-  async create(createCarDto: CreateCarDto /*, userId: number*/): Promise<Car> {
-    const newCar = this.carRepository.create(createCarDto);
-    // newCar.user = { id: userId } as any;
-
-    try {
-      return await this.carRepository.save(newCar);
-    } catch (error) {
-      // Handle specific database errors if needed
-      throw new Error('Failed to create car'); // Example of handling specific error
-    }
+  async create(createCarDto: CreateCarDto, userId: number): Promise<Car> {
+    const car = this.carsRepository.create({
+      ...createCarDto,
+      user: { id: userId },
+    });
+    return this.carsRepository.save(car);
   }
 
   async findAll(): Promise<Car[]> {
-    try {
-      return await this.carRepository.find();
-    } catch (error) {
-      if (error instanceof EntityNotFoundError) {
-        throw new NotFoundException('Cars not found');
-      }
-      throw error;
-    }
+    return this.carsRepository.find({ relations: ['user'] });
   }
 
   async findOne(id: number): Promise<Car> {
-    try {
-      return await this.carRepository.findOneOrFail({ where: { id } });
-    } catch (error) {
-      if (error instanceof EntityNotFoundError) {
-        throw new NotFoundException(`Car with id ${id} not found`);
-      }
-      throw error; // Throw other unexpected errors
+    const car = await this.carsRepository.findOne({ where: { id } });
+    if (!car) {
+      throw new NotFoundException(`Car with ID ${id} not found`);
     }
+    return car;
   }
 
   async update(
     id: number,
     updateCarDto: UpdateCarDto,
-    // userId: number,
+    user: User,
   ): Promise<Car> {
-    try {
-      // const car = await this.findOne(id);
-      // if (car.user.id !== userId) {
-      //   throw new UnauthorizedException(
-      //     'You are not authorized to update this car',
-      //   );
-      // }
-      await this.carRepository.update(id, updateCarDto);
-      return this.findOne(id);
-    } catch (error) {
-      if (error instanceof EntityNotFoundError) {
-        throw new NotFoundException(`Car with id ${id} not found`);
-      }
-      throw error;
+    const car = await this.findOne(id);
+    if (car.user.id !== user.id) {
+      throw new ForbiddenException('You are not allowed to update this car');
     }
+    Object.assign(car, updateCarDto);
+    return this.carsRepository.save(car);
   }
 
-  async remove(id: number /*, userId: number*/): Promise<void> {
-    try {
-      // const car = await this.findOne(id);
-      // if (car.user.id !== userId) {
-      //   throw new UnauthorizedException(
-      //     'You are not authorized to delete this car',
-      //   );
-      // }
-      await this.carRepository.delete(id);
-    } catch (error) {
-      if (error instanceof EntityNotFoundError) {
-        throw new NotFoundException(`Car with id ${id} not found`);
-      }
-      throw error;
+  async remove(id: number, user: User): Promise<void> {
+    const car = await this.findOne(id);
+    if (car.user.id !== user.id) {
+      throw new ForbiddenException('You are not allowed to delete this car');
     }
+    await this.carsRepository.remove(car);
   }
 }

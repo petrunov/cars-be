@@ -19,8 +19,8 @@ export class User {
   @Column({ type: 'varchar', length: 255 })
   password: string;
 
-  // @OneToMany(() => Car, (car) => car.user)
-  // cars: Car[];
+  @OneToMany(() => Car, (car) => car.user)
+  cars: Car[];
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
   createdAt: Date;

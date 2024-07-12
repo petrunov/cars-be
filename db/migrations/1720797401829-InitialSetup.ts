@@ -41,15 +41,17 @@ export class InitialSetup1720797401829 implements MigrationInterface {
         mileage VARCHAR(50) NOT NULL,
         extras TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        user_id INT UNSIGNED NOT NULL,
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
       )
     `);
 
     // Insert cars data
     await queryRunner.query(`
-      INSERT INTO cars (make, model, year, engine, type, gearbox, car_condition, hp, color, price, city, mileage, extras)
+      INSERT INTO cars (make, model, year, engine, type, gearbox, car_condition, hp, color, price, city, mileage, extras, user_id)
       VALUES 
-        ('Toyota', 'Camry', 2020, '2.5L', 'Sedan', 'Automatic', 'Used', 200, 'Red', 25000.00, 'New York', '50,000', 'Leather seats, Sunroof');
+        ('Toyota', 'Camry', 2020, '2.5L', 'Sedan', 'Automatic', 'Used', 200, 'Red', 25000.00, 'New York', '50,000', 'Leather seats, Sunroof', 1);
     `);
   }
 

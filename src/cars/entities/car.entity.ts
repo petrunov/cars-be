@@ -5,6 +5,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 import {
   IsNotEmpty,
@@ -88,10 +89,11 @@ export class Car {
   @UpdateDateColumn({ name: 'updated_at', type: 'timestamp' })
   updatedAt: Date;
 
-  // @Column({ name: 'user_id', type: 'int', unsigned: true })
-  // @IsInt()
-  // userId: number;
+  @Column({ name: 'user_id', type: 'int', unsigned: true })
+  @IsInt()
+  userId: number;
 
-  // @ManyToOne(() => User, (user) => user.cars, { onDelete: 'CASCADE' })
-  // user: User;
+  @ManyToOne(() => User, (user) => user.cars, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'user_id' })
+  user: User;
 }

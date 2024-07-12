@@ -26,11 +26,19 @@ docker: http://localhost:3001/api
 
 # Access API endpoints
 
+Get all cars:
 GET: `localhost:3000/api/cars`
 
+Create a new car:
 POST:
-Get an auth token with the credentials seeded by the `InitialSetup` db migration.
-`curl -X POST http://localhost:3000/auth/login -d '{"username": "petrunov", "password": "123"}' -H "Content-Type: application/json"`
+Get an auth token by registering a new user with username `testuser` and password `testpassword`:
+`curl -X POST http://localhost:3000/auth/register -H "Content-Type: application/json" -d '{"username":"testuser","password":"testpassword"}'`
+
+Alternatively for existing user use the login endpoint:
+`curl -X POST http://localhost:3000/auth/login -H "Content-Type: application/json" -d '{"username":"testuser","password":"testpassword"}'`
+
+Use the response output to take the auth token and pass it in the header by replacing <YOUR_TOKEN_HERE> in the curl command:
+`curl -X POST http://localhost:3000/cars -H "Authorization: Bearer <YOUR_TOKEN_HERE>" -H "Content-Type: application/json" -d '{"make":"Toyota","model":"Camry","year":2020,"engine":"2.5L","type":"Sedan","gearbox":"Automatic","car_condition":"Used","hp":200,"color":"Red","price":"25000.00","city":"New York","mileage":"50,000","extras":"Leather seats, Sunroof"}'`
 
 # DB Migrations Cheatsheet
 

@@ -26,7 +26,8 @@ export class CarsController {
   @UseGuards(AuthGuard)
   @UsePipes(new ValidationPipe({ whitelist: true }))
   create(@Request() req, @Body() createCarDto: CreateCarDto): Promise<Car> {
-    return this.carsService.create(createCarDto);
+    console.log(req);
+    return this.carsService.create(createCarDto, req.user.sub);
   }
 
   @Get()
@@ -47,12 +48,12 @@ export class CarsController {
     @Param('id') id: string,
     @Body() updateCarDto: UpdateCarDto,
   ): Promise<Car> {
-    return this.carsService.update(+id, updateCarDto);
+    return this.carsService.update(+id, updateCarDto, req.user.sub);
   }
 
   @Delete(':id')
   @UseGuards(AuthGuard)
   remove(@Request() req, @Param('id') id: string): Promise<void> {
-    return this.carsService.remove(+id);
+    return this.carsService.remove(+id, req.user.sub);
   }
 }
