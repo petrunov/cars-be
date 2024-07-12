@@ -42,10 +42,11 @@ export class CarsService {
   async update(
     id: number,
     updateCarDto: UpdateCarDto,
-    user: User,
+    user: number,
   ): Promise<Car> {
     const car = await this.findOne(id);
-    if (car.user.id !== user.id) {
+    console.log(id, car, user);
+    if (car.userId !== user) {
       throw new ForbiddenException('You are not allowed to update this car');
     }
     Object.assign(car, updateCarDto);
