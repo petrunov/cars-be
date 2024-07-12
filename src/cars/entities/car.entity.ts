@@ -50,7 +50,7 @@ export class Car {
   @Column({ type: 'varchar', length: 50 })
   @IsNotEmpty()
   @IsString()
-  condition: string;
+  car_condition: string;
 
   @Column({ type: 'int' })
   @IsInt()

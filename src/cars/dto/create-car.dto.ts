@@ -20,7 +20,7 @@ export class CreateCarDto {
   gearbox: string;
 
   @IsString()
-  condition: string;
+  car_condition: string;
 
   @IsInt()
   hp: number;
