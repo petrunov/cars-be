@@ -10,7 +10,6 @@ import { Repository } from 'typeorm';
 import { Car } from './entities/car.entity';
 import { CreateCarDto } from './dto/create-car.dto';
 import { UpdateCarDto } from './dto/update-car.dto';
-import { User } from '../users/entities/user.entity';
 
 @Injectable()
 export class CarsService {
@@ -53,9 +52,9 @@ export class CarsService {
     return this.carsRepository.save(car);
   }
 
-  async remove(id: number, user: User): Promise<void> {
+  async remove(id: number, user: number): Promise<void> {
     const car = await this.findOne(id);
-    if (car.user.id !== user.id) {
+    if (car.userId !== user) {
       throw new ForbiddenException('You are not allowed to delete this car');
     }
     await this.carsRepository.remove(car);
