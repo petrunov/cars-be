@@ -1,4 +1,19 @@
-# Initial start
+# Introduction
+
+- Only logged in users can create cars
+- Only the car created is allowed to edit it
+- Proper validation and error messages
+
+- JWT Secet and .env credentials are exposed as this app is just for demo purposes.
+- There are unit tests written for cars.service.ts - cars.service.spec.ts.
+- Eslint and prettier are configured.
+- Database created and seeded by DB migrations
+- Database integration throug TypeORM
+- OpenAPI documentation is available at http://localhost:3001/api.
+- Dockerized.
+- Protected REST endpoints with AuthGuard
+
+# Run the application
 
 ## With Docker:
 
