@@ -1,7 +1,7 @@
 # Introduction
 
 - Only logged in users can create cars
-- Only the car created is allowed to edit it
+- Only the user that created the car is allowed to edit it
 - Proper validation and error messages
 
 - JWT Secet and .env credentials are exposed as this app is just for demo purposes.
