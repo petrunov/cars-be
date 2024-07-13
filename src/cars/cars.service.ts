@@ -44,7 +44,6 @@ export class CarsService {
     user: number,
   ): Promise<Car> {
     const car = await this.findOne(id);
-    console.log(id, car, user);
     if (car.userId !== user) {
       throw new ForbiddenException('You are not allowed to update this car');
     }
