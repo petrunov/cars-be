@@ -1,7 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CarsController } from './cars.controller';
 import { CarsService } from './cars.service';
-import { validate } from 'class-validator';
 
 describe('CarsController', () => {
   let controller: CarsController;

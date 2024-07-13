@@ -6,7 +6,7 @@ import {
   UpdateDateColumn,
   OneToMany,
 } from 'typeorm';
-import { Car } from 'src/cars/entities/car.entity';
+import { Car } from '../../cars/entities/car.entity';
 
 @Entity({ name: 'users' })
 export class User {
