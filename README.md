@@ -20,7 +20,7 @@
 `MYSQL_HOST=host.docker.internal`
 `docker compose up`
 
-## On local machine:
+## Alternatively: on local machine:
 
 Note: With this option you need to have your localhost mysql server instance running at port 3306, prepared with database `cars` and user `carsdealer` and password `relaed` that has privileges on that database.
 
