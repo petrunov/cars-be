@@ -56,7 +56,7 @@ describe('CarsService', () => {
         color: 'Red',
         price: 30000,
         city: 'New York',
-        mileage: '0',
+        mileage: 0,
         extras: 'GPS',
       };
       mockCarRepository.create.mockReturnValue(oneCar);

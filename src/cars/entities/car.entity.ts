@@ -13,6 +13,7 @@ import {
   IsDecimal,
   IsOptional,
   IsString,
+  IsNumber,
 } from 'class-validator';
 import { User } from '../../users/entities/user.entity';
 
@@ -75,7 +76,7 @@ export class Car {
 
   @Column({ type: 'varchar', length: 50 })
   @IsNotEmpty()
-  @IsString()
+  @IsInt()
   mileage: number;
 
   @Column({ type: 'text', nullable: true })
