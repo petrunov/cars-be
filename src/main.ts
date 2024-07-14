@@ -6,6 +6,20 @@ import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  app.enableCors({
+    origin: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+    allowedHeaders: [
+      'Content-Type',
+      'Origin',
+      'X-Requested-With',
+      'Accept',
+      'Authorization',
+    ],
+    exposedHeaders: ['Authorization'],
+    credentials: true,
+  });
+
   const config = new DocumentBuilder()
     .setTitle('Cars API')
     .setDescription('API description')

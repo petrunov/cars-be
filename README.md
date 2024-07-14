@@ -31,7 +31,7 @@ Note: With this option you need to have your localhost mysql server instance run
 
 # Fresh restart
 
-`docker-compose down -v && docker-compose rm -f && docker image prune -f && docker network prune -f && docker-compose up --build`
+`docker-compose down --rmi all -v && docker-compose up -d`
 
 # Access API documentation
 

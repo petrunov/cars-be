@@ -76,7 +76,7 @@ export class Car {
   @Column({ type: 'varchar', length: 50 })
   @IsNotEmpty()
   @IsString()
-  mileage: string;
+  mileage: number;
 
   @Column({ type: 'text', nullable: true })
   @IsOptional()

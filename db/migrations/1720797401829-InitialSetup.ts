@@ -38,7 +38,7 @@ export class InitialSetup1720797401829 implements MigrationInterface {
         color VARCHAR(50) NOT NULL,
         price DECIMAL(10, 2) NOT NULL,
         city VARCHAR(50) NOT NULL,
-        mileage VARCHAR(50) NOT NULL,
+        mileage INT NOT NULL,
         extras TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -51,7 +51,7 @@ export class InitialSetup1720797401829 implements MigrationInterface {
     await queryRunner.query(`
       INSERT INTO cars (make, model, year, engine, type, gearbox, car_condition, hp, color, price, city, mileage, extras, user_id)
       VALUES 
-        ('Toyota', 'Camry', 2020, '2.5L', 'Sedan', 'Automatic', 'Used', 200, 'Red', 25000.00, 'New York', '50,000', 'Leather seats, Sunroof', 1);
+        ('Mercedes', 'EQA', 2020, 'Electric', 'Sedan', 'Automatic', 'Used', 200, 'red', 25000.00, 'New York', 50000, 'Leather seats, Sunroof', 1);
     `);
   }
 

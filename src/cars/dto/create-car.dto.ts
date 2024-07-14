@@ -35,7 +35,7 @@ export class CreateCarDto {
   city: string;
 
   @IsString()
-  mileage: string;
+  mileage: number;
 
   @IsOptional()
   @IsString()
