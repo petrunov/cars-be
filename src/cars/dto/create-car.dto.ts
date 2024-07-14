@@ -28,7 +28,7 @@ export class CreateCarDto {
   @IsString()
   color: string;
 
-  @IsDecimal()
+  @IsInt()
   price: number;
 
   @IsString()

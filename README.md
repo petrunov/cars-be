@@ -57,7 +57,7 @@ Alternatively for existing user use the login endpoint:
 `curl -X POST http://localhost:3001/auth/login -H "Content-Type: application/json" -d '{"username":"testuser","password":"testpassword"}'`
 
 Use the response output to take the auth token and pass it in the header by replacing <YOUR_TOKEN_HERE> in the curl command:
-`curl -X POST http://localhost:3001/cars -H "Authorization: Bearer <YOUR_TOKEN_HERE>" -H "Content-Type: application/json" -d '{"make":"BMW","model":"E60","year":2007,"engine":"Diesel","type":"Touring","gearbox":"Automatic","car_condition":"Used","hp":200,"color":"red","price":"25000.00","city":"New York","mileage":50000,"extras":"Leather seats, Sunroof"}'`
+`curl -X POST http://localhost:3001/cars -H "Authorization: Bearer <YOUR_TOKEN_HERE>" -H "Content-Type: application/json" -d '{"make":"BMW","model":"E60","year":2007,"engine":"Diesel","type":"Touring","gearbox":"Automatic","car_condition":"Used","hp":200,"color":"red","price":25000,"city":"New York","mileage":50000,"extras":"Leather seats, Sunroof"}'`
 
 Edit existing car:
 `curl -X PATCH http://localhost:3001/cars/<CAR_ID_CREATED_BY_THE_USER_WHOS_TOKEN_IS_IN_THE_HEADER> -H "Authorization: Bearer <YOUR_TOKEN_HERE>" -H "Content-Type: application/json" -d '{"year":2024}'`

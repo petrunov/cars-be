@@ -65,8 +65,8 @@ export class Car {
   @IsString()
   color: string;
 
-  @Column({ type: 'decimal', precision: 10, scale: 2 })
-  @IsDecimal()
+  @Column({ type: 'int', precision: 10, scale: 2 })
+  @IsInt()
   price: number;
 
   @Column({ type: 'varchar', length: 50 })
@@ -74,7 +74,7 @@ export class Car {
   @IsString()
   city: string;
 
-  @Column({ type: 'varchar', length: 50 })
+  @Column({ type: 'int' })
   @IsNotEmpty()
   @IsInt()
   mileage: number;

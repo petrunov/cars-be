@@ -36,7 +36,7 @@ export class InitialSetup1720797401829 implements MigrationInterface {
         car_condition VARCHAR(50) NOT NULL,
         hp INT NOT NULL,
         color VARCHAR(50) NOT NULL,
-        price DECIMAL(10, 2) NOT NULL,
+        price INT NOT NULL,
         city VARCHAR(50) NOT NULL,
         mileage INT NOT NULL,
         extras TEXT,
@@ -51,7 +51,7 @@ export class InitialSetup1720797401829 implements MigrationInterface {
     await queryRunner.query(`
       INSERT INTO cars (make, model, year, engine, type, gearbox, car_condition, hp, color, price, city, mileage, extras, user_id)
       VALUES 
-        ('Mercedes', 'EQA', 2020, 'Electric', 'Sedan', 'Automatic', 'Used', 200, 'red', 25000.00, 'New York', 50000, 'Leather seats, Sunroof', 1);
+        ('Mercedes', 'EQA', 2020, 'Electric', 'Sedan', 'Automatic', 'Used', 200, 'red', 25000, 'New York', 50000, 'Leather seats, Sunroof', 1);
     `);
   }
 
